@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import BottomNav from "./components/BottomNav"; // Adjust path if needed
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "AI Paper Builder",
+  description: "Automated question paper generation for coaching centers.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
+      >
+        {/* Main Content */}
+        {children}
+        
+        {/* Vercel Analytics */}
+        <Analytics />
+        
+        {/* Global Bottom Navigation */}
+        <BottomNav />
+      </body>
+    </html>
+  );
+}
